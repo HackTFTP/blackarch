@@ -1,9 +1,12 @@
+#!/bin/bash
 sudo pacman -Sy
-sudo pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay-bin.git 
 useradd onlymake
-sudo chown onlymake yay-bin/
-cd yay-bin/  
-su onlymake
+mkdir /tmp/yay
+cd /tmp/yay
+curl -OJ 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=yay'
 makepkg -si
-userdel -f onlymake
+cd
+rm -rf /tmp/yay
+yay --version
+su
+userdel onlymake -f
